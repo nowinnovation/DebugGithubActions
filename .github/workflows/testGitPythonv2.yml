@@ -4,7 +4,7 @@ on:
   push:
  
 jobs:
-  gitPython:
+  gitPythonv2:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
