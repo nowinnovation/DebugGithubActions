@@ -2,7 +2,8 @@ name: set-env-and-add-path
 
 on: 
   push:
- 
+
+jobs:
   useenv:
     runs-on: ${{ matrix.os }}
     strategy:
