@@ -1,0 +1,24 @@
+name: testGitPythonv2
+
+on: 
+  push:
+ 
+jobs:
+  gitPython:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+
+    steps:
+    - uses: actions/setup-python@v2
+    - name: Install latest python dependencies
+      run: | 
+        python -m pip install --upgrade pip 
+        pip install gitpython
+    - uses: actions/checkout@v2
+    - name: Run a Python script that uses gitpython
+      run: |
+        cd ..
+        python3 ${{ github.event.repository.name }}/testGitPython.py
+        cd ${{ github.event.repository.name }}
