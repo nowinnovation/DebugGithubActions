@@ -1,10 +1,10 @@
-name: midnight
+name: set-env-and-add-path
 
 on: 
   push:
  
 jobs:
-  build:
+  gitPython:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -17,10 +17,22 @@ jobs:
         python -m pip install --upgrade pip 
         pip install gitpython
     - uses: actions/checkout@v1
-    - name: Find and mirror a list of public repos
-      env:
+    - name: Run a Python script that uses gitpython
       run: |
         cd ..
         python3 ${{ github.event.repository.name }}/testGitPython.py
         cd ${{ github.event.repository.name }}
+
+  useenv:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+
+    steps:
+    - name: use the ENV YML tag
+      env:
+        REPO_NAME: ${{ github.event.repository.name }}
+      run: |
+        echo $REPO_NAME
 
